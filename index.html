@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¡Hola! — Học tiếng Tây Ban Nha</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Be+Vietnam+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fbf6ee; --card:#fffdf9; --ink:#2b2118; --muted:#7a6a5a;
+  --red:#c8102e; --gold:#f1bf00; --terra:#d9643a; --green:#2f8f5b;
+  --line:#eadfcf; --radius:18px;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Be Vietnam Pro',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+h1,h2,h3{font-family:'Fraunces',serif;margin:0}
+button{font:inherit;cursor:pointer}
+header{background:linear-gradient(180deg,var(--red) 0 25%,var(--gold) 25% 75%,var(--red) 75%);padding:4px 0}
+.top{background:var(--bg);padding:20px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.brand h1{font-size:2rem;font-weight:800;letter-spacing:-.5px}
+.brand h1 span{color:var(--red)}
+.brand p{margin:2px 0 0;color:var(--muted);font-size:.95rem}
+.stats{display:flex;gap:10px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px 14px;text-align:center;min-width:84px}
+.stat b{display:block;font-size:1.3rem;font-family:'Fraunces',serif}
+.stat small{color:var(--muted);font-size:.75rem}
+nav{display:flex;gap:6px;padding:0 24px 16px;flex-wrap:wrap}
+nav button{border:1px solid var(--line);background:var(--card);padding:9px 16px;border-radius:999px;font-weight:600;color:var(--muted)}
+nav button.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+main{max-width:980px;margin:0 auto;padding:8px 24px 60px}
+.section{display:none}.section.active{display:block}
+.topics{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
+.topic{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;text-align:left;transition:transform .15s,box-shadow .15s;position:relative}
+.topic:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(80,50,20,.08)}
+.topic .emo{font-size:2rem}
+.topic h3{font-size:1.15rem;margin:6px 0 2px}
+.topic small{color:var(--muted)}
+.bar{height:6px;background:var(--line);border-radius:6px;margin-top:12px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--green);width:0}
+.picker{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.picker button{border:1px solid var(--line);background:var(--card);padding:6px 12px;border-radius:999px;font-size:.9rem}
+.picker button.active{background:var(--terra);color:#fff;border-color:var(--terra)}
+.wordlist{display:grid;gap:8px}
+.word{display:grid;grid-template-columns:1fr 1fr auto auto;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px}
+.word .es{font-weight:600;font-size:1.08rem}
+.word .vi{color:var(--muted)}
+.icon{border:none;background:#f3eadc;border-radius:10px;width:38px;height:38px;font-size:1.1rem}
+.icon:hover{background:var(--gold)}
+.icon.known{background:var(--green);color:#fff}
+/* flashcard */
+.fc-wrap{display:flex;flex-direction:column;align-items:center;gap:18px}
+.flash{width:min(440px,100%);height:260px;perspective:1000px;cursor:pointer}
+.flash-inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.flash.flipped .flash-inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:var(--radius);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center}
+.front{background:var(--card);border:2px solid var(--line)}
+.back{background:var(--ink);color:#fff;transform:rotateY(180deg)}
+.face .big{font-family:'Fraunces',serif;font-size:2.4rem;font-weight:800}
+.face .hint{color:var(--muted);font-size:.85rem;margin-top:10px}
+.back .hint{color:#c9b9a6}
+.row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.btn{border:none;border-radius:12px;padding:11px 20px;font-weight:600;background:var(--ink);color:#fff}
+.btn.ghost{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+.btn.good{background:var(--green)}.btn.bad{background:var(--terra)}
+.counter{color:var(--muted);font-size:.9rem}
+/* quiz */
+.quiz{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:28px;max-width:560px;margin:0 auto;text-align:center}
+.quiz .q{font-family:'Fraunces',serif;font-size:2rem;margin:10px 0 4px}
+.opts{display:grid;gap:10px;margin-top:20px}
+.opt{border:2px solid var(--line);background:#fff;border-radius:12px;padding:13px;font-weight:500;text-align:left}
+.opt:hover:not(:disabled){border-color:var(--gold)}
+.opt.right{border-color:var(--green);background:#e7f5ec}
+.opt.wrong{border-color:var(--red);background:#fbe7e9}
+.modes{display:flex;gap:8px;justify-content:center;margin-bottom:16px;flex-wrap:wrap}
+.modes button{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:6px 14px;font-size:.88rem}
+.modes button.active{background:var(--ink);color:#fff}
+input.type{width:100%;padding:13px;border:2px solid var(--line);border-radius:12px;font:inherit;font-size:1.1rem;margin-top:20px;text-align:center}
+input.type:focus{outline:none;border-color:var(--gold)}
+.feedback{min-height:28px;margin-top:14px;font-weight:600}
+.accents{display:flex;gap:6px;justify-content:center;margin-top:10px;flex-wrap:wrap}
+.accents button{border:1px solid var(--line);background:#fff;border-radius:8px;width:36px;height:36px}
+/* grammar */
+.gcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;margin-bottom:14px}
+.gcard h3{font-size:1.25rem;margin-bottom:8px}
+.gcard p{margin:6px 0;color:#4a3d31}
+table{border-collapse:collapse;width:100%;margin-top:10px;font-size:.95rem}
+td,th{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left}
+th{color:var(--muted);font-weight:600;font-size:.85rem}
+td.es{font-weight:600;cursor:pointer}td.es:hover{color:var(--red)}
+.tip{background:#fff6d6;border-left:4px solid var(--gold);padding:10px 14px;border-radius:8px;margin-top:10px;font-size:.93rem}
+footer{text-align:center;color:var(--muted);font-size:.85rem;padding:20px}
+@media(max-width:600px){.word{grid-template-columns:1fr auto auto}.word .vi{grid-column:1;grid-row:2}.brand h1{font-size:1.6rem}}
+</style>
+</head>
+<body>
+<header><div class="top">
+  <div class="brand"><h1>¡<span>Hola</span>! Español</h1><p>Học tiếng Tây Ban Nha mỗi ngày — từ vựng, flashcard, quiz & ngữ pháp</p></div>
+  <div class="stats">
+    <div class="stat"><b id="sKnown">0</b><small>Đã thuộc</small></div>
+    <div class="stat"><b id="sStreak">0</b><small>Chuỗi đúng</small></div>
+    <div class="stat"><b id="sBest">0</b><small>Kỷ lục</small></div>
+  </div>
+</div></header>
+<nav id="nav">
+  <button data-s="home" class="active">🏠 Chủ đề</button>
+  <button data-s="vocab">📖 Từ vựng</button>
+  <button data-s="flash">🃏 Flashcard</button>
+  <button data-s="quiz">✍️ Luyện tập</button>
+  <button data-s="grammar">📐 Ngữ pháp</button>
+</nav>
+<main>
+  <section id="home" class="section active">
+    <h2 style="margin-bottom:14px">Chọn một chủ đề để bắt đầu</h2>
+    <div class="topics" id="topics"></div>
+  </section>
+
+  <section id="vocab" class="section">
+    <div class="picker" id="vPicker"></div>
+    <div class="wordlist" id="wordlist"></div>
+  </section>
+
+  <section id="flash" class="section">
+    <div class="picker" id="fPicker"></div>
+    <div class="fc-wrap">
+      <div class="counter" id="fCount"></div>
+      <div class="flash" id="flashCard"><div class="flash-inner">
+        <div class="face front"><div class="big" id="fFront"></div><div class="hint">Bấm để lật thẻ · 🔊 nghe phát âm</div></div>
+        <div class="face back"><div class="big" id="fBack" style="font-size:1.8rem"></div><div class="hint" id="fEx"></div></div>
+      </div></div>
+      <div class="row">
+        <button class="btn ghost" id="fSpeak">🔊 Nghe</button>
+        <button class="btn bad" id="fAgain">Chưa nhớ</button>
+        <button class="btn good" id="fGot">Đã nhớ ✓</button>
+        <button class="btn ghost" id="fShuffle">🔀 Trộn</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="quiz" class="section">
+    <div class="picker" id="qPicker"></div>
+    <div class="modes" id="qModes">
+      <button data-m="es2vi" class="active">Tây Ban Nha → Việt</button>
+      <button data-m="vi2es">Việt → Tây Ban Nha</button>
+      <button data-m="listen">🎧 Nghe & chọn</button>
+      <button data-m="type">⌨️ Gõ từ</button>
+    </div>
+    <div class="quiz" id="quizBox"></div>
+  </section>
+
+  <section id="grammar" class="section" ></section>
+</main>
+<footer>Mẹo: bấm vào bất kỳ từ tiếng Tây Ban Nha nào để nghe phát âm (dùng giọng đọc của trình duyệt). ¡Buena suerte! 🇪🇸</footer>
+
+<script>
+const DATA = {
+  saludos:{name:"Chào hỏi",emo:"👋",words:[
+    ["hola","xin chào","¡Hola! ¿Qué tal?"],["buenos días","chào buổi sáng","Buenos días, señora."],
+    ["buenas tardes","chào buổi chiều","Buenas tardes a todos."],["buenas noches","chào buổi tối / chúc ngủ ngon","Buenas noches, mamá."],
+    ["adiós","tạm biệt","Adiós, hasta mañana."],["hasta luego","hẹn gặp lại","¡Hasta luego, amigo!"],
+    ["por favor","làm ơn","Un café, por favor."],["gracias","cảm ơn","Muchas gracias."],
+    ["de nada","không có gì","—Gracias. —De nada."],["lo siento","xin lỗi","Lo siento mucho."],
+    ["perdón","xin lỗi (cho qua)","Perdón, ¿dónde está el baño?"],["¿cómo estás?","bạn khỏe không?","Hola, ¿cómo estás?"],
+    ["bien","khỏe / tốt","Estoy bien, gracias."],["me llamo...","tôi tên là...","Me llamo Trường."],
+    ["mucho gusto","rất vui được gặp","Mucho gusto, Ana."]]},
+  numeros:{name:"Số đếm",emo:"🔢",words:[
+    ["uno","một","Tengo un hermano."],["dos","hai","Dos cafés, por favor."],["tres","ba","Son las tres."],
+    ["cuatro","bốn","Cuatro personas."],["cinco","năm","Cinco euros."],["seis","sáu","Seis días."],
+    ["siete","bảy","Siete años."],["ocho","tám","A las ocho."],["nueve","chín","Nueve gatos."],
+    ["diez","mười","Diez minutos."],["veinte","hai mươi","Tengo veinte años."],["cien","một trăm","Cien por ciento."],
+    ["mil","một nghìn","Mil gracias."]]},
+  colores:{name:"Màu sắc",emo:"🎨",words:[
+    ["rojo","màu đỏ","El coche es rojo."],["azul","màu xanh dương","El cielo es azul."],
+    ["verde","màu xanh lá","La hierba es verde."],["amarillo","màu vàng","El sol es amarillo."],
+    ["negro","màu đen","Un gato negro."],["blanco","màu trắng","La nieve es blanca."],
+    ["naranja","màu cam","Una camiseta naranja."],["morado","màu tím","Flores moradas."],
+    ["rosa","màu hồng","Un vestido rosa."],["gris","màu xám","Un día gris."],["marrón","màu nâu","Ojos marrones."]]},
+  familia:{name:"Gia đình",emo:"👨‍👩‍👧",words:[
+    ["la madre","mẹ","Mi madre es profesora."],["el padre","bố","Mi padre trabaja mucho."],
+    ["el hermano","anh / em trai","Mi hermano es alto."],["la hermana","chị / em gái","Mi hermana estudia."],
+    ["el hijo","con trai","Tienen un hijo."],["la hija","con gái","Su hija es pequeña."],
+    ["el abuelo","ông","Mi abuelo tiene 80 años."],["la abuela","bà","La abuela cocina bien."],
+    ["el tío","chú / bác / cậu","Mi tío vive en Madrid."],["la tía","cô / dì","Mi tía es simpática."],
+    ["el primo","anh / em họ","Mi primo juega al fútbol."],["la familia","gia đình","Amo a mi familia."]]},
+  comida:{name:"Đồ ăn & uống",emo:"🥘",words:[
+    ["el agua","nước","Un vaso de agua."],["el pan","bánh mì","Compro pan."],["el café","cà phê","Me gusta el café."],
+    ["la leche","sữa","Café con leche."],["el arroz","cơm / gạo","Arroz con pollo."],["el pollo","thịt gà","El pollo está rico."],
+    ["la carne","thịt","No como carne."],["el pescado","cá","Pescado a la plancha."],["la fruta","trái cây","Como fruta cada día."],
+    ["la manzana","quả táo","Una manzana roja."],["el queso","phô mai","Queso manchego."],["la cerveza","bia","Una cerveza fría."],
+    ["el desayuno","bữa sáng","El desayuno es a las ocho."],["la cena","bữa tối","La cena está lista."]]},
+  verbos:{name:"Động từ cơ bản",emo:"🏃",words:[
+    ["ser","là (bản chất)","Soy estudiante."],["estar","là / ở (trạng thái)","Estoy cansado."],
+    ["tener","có","Tengo hambre."],["hacer","làm","¿Qué haces?"],["ir","đi","Voy a la playa."],
+    ["comer","ăn","Comemos juntos."],["beber","uống","Bebo agua."],["hablar","nói","Hablo un poco de español."],
+    ["vivir","sống","Vivo en Hanói."],["querer","muốn / yêu","Quiero un helado."],["poder","có thể","¿Puedo pasar?"],
+    ["trabajar","làm việc","Trabajo en casa."],["estudiar","học","Estudio español."],["dormir","ngủ","Duermo ocho horas."]]},
+  frases:{name:"Câu giao tiếp",emo:"💬",words:[
+    ["¿Hablas inglés?","Bạn nói tiếng Anh không?",""],["No entiendo","Tôi không hiểu",""],
+    ["¿Cuánto cuesta?","Cái này giá bao nhiêu?",""],["¿Dónde está el baño?","Nhà vệ sinh ở đâu?",""],
+    ["La cuenta, por favor","Làm ơn cho tính tiền",""],["Más despacio, por favor","Làm ơn nói chậm hơn",""],
+    ["¿Qué hora es?","Mấy giờ rồi?",""],["Me gusta mucho","Tôi rất thích",""],
+    ["Soy de Vietnam","Tôi đến từ Việt Nam",""],["¿Cómo se dice...?","... nói thế nào?",""],
+    ["Necesito ayuda","Tôi cần giúp đỡ",""],["Te quiero","Anh/em yêu em/anh",""]]},
+  tiempo:{name:"Thời gian",emo:"📅",words:[
+    ["hoy","hôm nay","Hoy hace calor."],["mañana","ngày mai","Mañana voy a Madrid."],["ayer","hôm qua","Ayer llovió."],
+    ["lunes","thứ Hai","El lunes trabajo."],["martes","thứ Ba","Nos vemos el martes."],["miércoles","thứ Tư","El miércoles estudio."],
+    ["jueves","thứ Năm","El jueves hay fiesta."],["viernes","thứ Sáu","¡Por fin es viernes!"],
+    ["sábado","thứ Bảy","El sábado descanso."],["domingo","Chủ nhật","El domingo como con mi familia."],
+    ["la semana","tuần","Una semana de vacaciones."],["el mes","tháng","El mes que viene."],["el año","năm","Feliz año nuevo."]]}
+};
+
+const GRAMMAR = [
+  {t:"1. Phát âm cơ bản",html:`<p>Tiếng Tây Ban Nha đọc gần như <b>viết sao đọc vậy</b>. Một vài chữ cần nhớ:</p>
+  <table><tr><th>Chữ</th><th>Đọc như</th><th>Ví dụ</th></tr>
+  <tr><td>j, g (trước e/i)</td><td>"h" bật mạnh từ cổ</td><td class="es">jamón, gente</td></tr>
+  <tr><td>h</td><td>câm, không đọc</td><td class="es">hola, hora</td></tr>
+  <tr><td>ñ</td><td>"nh"</td><td class="es">España, mañana</td></tr>
+  <tr><td>ll, y</td><td>"d" / "j" nhẹ</td><td class="es">llamar, yo</td></tr>
+  <tr><td>rr</td><td>"r" rung mạnh</td><td class="es">perro, carro</td></tr>
+  <tr><td>z, c (trước e/i)</td><td>"th" (Tây Ban Nha) hoặc "x" (Mỹ Latinh)</td><td class="es">zapato, cine</td></tr>
+  <tr><td>v</td><td>gần như "b"</td><td class="es">vino, vivir</td></tr></table>
+  <div class="tip">Dấu sắc (á, é, í, ó, ú) cho biết âm tiết được nhấn: <b>café</b>, <b>música</b>.</div>`},
+  {t:"2. Đại từ nhân xưng",html:`<table><tr><th>Tây Ban Nha</th><th>Tiếng Việt</th></tr>
+  <tr><td class="es">yo</td><td>tôi</td></tr><tr><td class="es">tú</td><td>bạn (thân mật)</td></tr>
+  <tr><td class="es">él / ella / usted</td><td>anh ấy / cô ấy / ngài (lịch sự)</td></tr>
+  <tr><td class="es">nosotros / nosotras</td><td>chúng tôi</td></tr>
+  <tr><td class="es">vosotros / vosotras</td><td>các bạn (chỉ dùng ở Tây Ban Nha)</td></tr>
+  <tr><td class="es">ellos / ellas / ustedes</td><td>họ / quý vị</td></tr></table>
+  <div class="tip">Người Tây Ban Nha hay <b>bỏ đại từ</b> vì đuôi động từ đã cho biết ai làm: <i>Hablo español</i> = Tôi nói tiếng Tây Ban Nha.</div>`},
+  {t:"3. Giống & mạo từ",html:`<p>Danh từ có giống <b>đực</b> (thường đuôi -o) hoặc <b>cái</b> (thường đuôi -a).</p>
+  <table><tr><th></th><th>Xác định (the)</th><th>Không xác định (a)</th></tr>
+  <tr><td>Đực số ít</td><td class="es">el libro</td><td class="es">un libro</td></tr>
+  <tr><td>Cái số ít</td><td class="es">la casa</td><td class="es">una casa</td></tr>
+  <tr><td>Đực số nhiều</td><td class="es">los libros</td><td class="es">unos libros</td></tr>
+  <tr><td>Cái số nhiều</td><td class="es">las casas</td><td class="es">unas casas</td></tr></table>
+  <div class="tip">Ngoại lệ hay gặp: <b>el día</b>, <b>el problema</b>, <b>la mano</b>. Tính từ đổi theo danh từ: <i>el coche rojo</i>, <i>la casa roja</i>.</div>`},
+  {t:"4. Chia động từ thì hiện tại",html:`<p>Động từ có 3 nhóm đuôi: <b>-ar</b>, <b>-er</b>, <b>-ir</b>. Bỏ đuôi, thêm đuôi mới:</p>
+  <table><tr><th></th><th>hablar (nói)</th><th>comer (ăn)</th><th>vivir (sống)</th></tr>
+  <tr><td>yo</td><td class="es">hablo</td><td class="es">como</td><td class="es">vivo</td></tr>
+  <tr><td>tú</td><td class="es">hablas</td><td class="es">comes</td><td class="es">vives</td></tr>
+  <tr><td>él/ella</td><td class="es">habla</td><td class="es">come</td><td class="es">vive</td></tr>
+  <tr><td>nosotros</td><td class="es">hablamos</td><td class="es">comemos</td><td class="es">vivimos</td></tr>
+  <tr><td>vosotros</td><td class="es">habláis</td><td class="es">coméis</td><td class="es">vivís</td></tr>
+  <tr><td>ellos</td><td class="es">hablan</td><td class="es">comen</td><td class="es">viven</td></tr></table>`},
+  {t:"5. Ser và Estar — cả hai đều là \"là\"",html:`<p><b>Ser</b> dùng cho bản chất, lâu dài (nghề nghiệp, quốc tịch, tính cách). <b>Estar</b> dùng cho trạng thái tạm thời và vị trí.</p>
+  <table><tr><th></th><th>ser</th><th>estar</th></tr>
+  <tr><td>yo</td><td class="es">soy</td><td class="es">estoy</td></tr><tr><td>tú</td><td class="es">eres</td><td class="es">estás</td></tr>
+  <tr><td>él/ella</td><td class="es">es</td><td class="es">está</td></tr><tr><td>nosotros</td><td class="es">somos</td><td class="es">estamos</td></tr>
+  <tr><td>vosotros</td><td class="es">sois</td><td class="es">estáis</td></tr><tr><td>ellos</td><td class="es">son</td><td class="es">están</td></tr></table>
+  <div class="tip"><i>Soy vietnamita</i> (tôi là người Việt) · <i>Estoy cansado</i> (tôi đang mệt) · <i>Madrid está en España</i>.</div>`},
+  {t:"6. Câu hỏi & phủ định",html:`<p>Phủ định: chỉ cần thêm <b>no</b> trước động từ — <i>No hablo francés</i>.</p>
+  <p>Câu hỏi có dấu <b>¿ ?</b> ở cả đầu và cuối. Từ để hỏi luôn có dấu:</p>
+  <table><tr><th>Từ</th><th>Nghĩa</th></tr>
+  <tr><td class="es">¿qué?</td><td>cái gì</td></tr><tr><td class="es">¿quién?</td><td>ai</td></tr>
+  <tr><td class="es">¿dónde?</td><td>ở đâu</td></tr><tr><td class="es">¿cuándo?</td><td>khi nào</td></tr>
+  <tr><td class="es">¿por qué?</td><td>tại sao</td></tr><tr><td class="es">¿cómo?</td><td>như thế nào</td></tr>
+  <tr><td class="es">¿cuánto?</td><td>bao nhiêu</td></tr></table>`}
+];
+
+// ---------- state ----------
+const store = {
+  get(k,d){try{const v=localStorage.getItem('es_'+k);return v?JSON.parse(v):d}catch(e){return d}},
+  set(k,v){try{localStorage.setItem('es_'+k,JSON.stringify(v))}catch(e){}}
+};
+let known = new Set(store.get('known',[]));
+let best = store.get('best',0), streak = 0;
+let current = 'saludos';
+const $ = s => document.querySelector(s);
+const keyOf = (t,w) => t+'|'+w[0];
+
+function saveKnown(){store.set('known',[...known]);renderStats();}
+function renderStats(){ $('#sKnown').textContent=known.size; $('#sStreak').textContent=streak; $('#sBest').textContent=best; }
+
+// ---------- speech ----------
+let esVoice=null;
+function pickVoice(){const vs=speechSynthesis.getVoices();esVoice=vs.find(v=>v.lang==='es-ES')||vs.find(v=>v.lang&&v.lang.startsWith('es'))||null;}
+if('speechSynthesis' in window){pickVoice();speechSynthesis.onvoiceschanged=pickVoice;}
+function speak(text){
+  if(!('speechSynthesis' in window))return;
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text.replace(/\.\.\./g,''));
+  u.lang='es-ES'; u.rate=.85; if(esVoice)u.voice=esVoice;
+  speechSynthesis.speak(u);
+}
+document.addEventListener('click',e=>{if(e.target.matches('td.es'))speak(e.target.textContent)});
+
+// ---------- nav ----------
+function show(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.toggle('active',s.id===id));
+  document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('active',b.dataset.s===id));
+  if(id==='home')renderTopics(); if(id==='vocab')renderVocab(); if(id==='flash')startFlash(); if(id==='quiz')nextQ();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+$('#nav').onclick=e=>{const b=e.target.closest('button');if(b)show(b.dataset.s)};
+
+function renderPicker(el,cb){
+  el.innerHTML=Object.entries(DATA).map(([k,t])=>`<button data-k="${k}" class="${k===current?'active':''}">${t.emo} ${t.name}</button>`).join('');
+  el.onclick=e=>{const b=e.target.closest('button');if(!b)return;current=b.dataset.k;renderPicker(el,cb);cb();};
+}
+
+// ---------- home ----------
+function renderTopics(){
+  $('#topics').innerHTML=Object.entries(DATA).map(([k,t])=>{
+    const n=t.words.filter(w=>known.has(keyOf(k,w))).length, pct=Math.round(n/t.words.length*100);
+    return `<button class="topic" data-k="${k}"><div class="emo">${t.emo}</div><h3>${t.name}</h3><small>${n}/${t.words.length} từ đã thuộc</small><div class="bar"><i style="width:${pct}%"></i></div></button>`;
+  }).join('');
+  $('#topics').onclick=e=>{const b=e.target.closest('.topic');if(b){current=b.dataset.k;show('vocab')}};
+}
+
+// ---------- vocab ----------
+function renderVocab(){
+  renderPicker($('#vPicker'),renderVocab);
+  const t=DATA[current];
+  $('#wordlist').innerHTML=t.words.map((w,i)=>{
+    const k=known.has(keyOf(current,w));
+    return `<div class="word"><div><div class="es">${w[0]}</div>${w[2]?`<small style="color:var(--muted)"><i>${w[2]}</i></small>`:''}</div>
+    <div class="vi">${w[1]}</div>
+    <button class="icon" data-say="${i}" title="Nghe">🔊</button>
+    <button class="icon ${k?'known':''}" data-know="${i}" title="Đánh dấu đã thuộc">✓</button></div>`;
+  }).join('');
+  $('#wordlist').onclick=e=>{
+    const b=e.target.closest('button');if(!b)return;
+    if(b.dataset.say){const w=t.words[b.dataset.say];speak(w[0]);}
+    if(b.dataset.know){const k=keyOf(current,t.words[b.dataset.know]);known.has(k)?known.delete(k):known.add(k);saveKnown();renderVocab();}
+  };
+}
+
+// ---------- flashcards ----------
+let deck=[],fi=0;
+function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function startFlash(){renderPicker($('#fPicker'),startFlash);deck=[...DATA[current].words];fi=0;drawFlash();}
+function drawFlash(){
+  const fc=$('#flashCard');fc.classList.remove('flipped');
+  if(fi>=deck.length){$('#fFront').textContent='¡Muy bien! 🎉';$('#fBack').textContent='Hết bộ thẻ';$('#fEx').textContent='';$('#fCount').textContent='Bấm "Trộn" để học lại';return;}
+  const w=deck[fi];
+  setTimeout(()=>{$('#fFront').textContent=w[0];$('#fBack').textContent=w[1];$('#fEx').textContent=w[2]||'';},150);
+  $('#fCount').textContent=`Thẻ ${fi+1} / ${deck.length}`;
+}
+$('#flashCard').onclick=()=>$('#flashCard').classList.toggle('flipped');
+$('#fSpeak').onclick=()=>{if(deck[fi])speak(deck[fi][0])};
+$('#fGot').onclick=()=>{if(deck[fi]){known.add(keyOf(current,deck[fi]));saveKnown();}fi++;drawFlash();};
+$('#fAgain').onclick=()=>{if(deck[fi]){const w=deck.splice(fi,1)[0];deck.push(w);}drawFlash();};
+$('#fShuffle').onclick=()=>{deck=shuffle(DATA[current].words);fi=0;drawFlash();};
+
+// ---------- quiz ----------
+let mode='es2vi';
+$('#qModes').onclick=e=>{const b=e.target.closest('button');if(!b)return;mode=b.dataset.m;
+  document.querySelectorAll('#qModes button').forEach(x=>x.classList.toggle('active',x===b));nextQ();};
+const norm=s=>s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[¿?¡!.,]/g,'').replace(/^(el|la|los|las) /,'').trim();
+function score(ok){
+  if(ok){streak++;if(streak>best){best=streak;store.set('best',best);}}else streak=0;
+  renderStats();
+}
+function nextQ(){
+  renderPicker($('#qPicker'),nextQ);
+  const words=DATA[current].words, w=words[Math.floor(Math.random()*words.length)];
+  const box=$('#quizBox');
+  if(mode==='type'){
+    box.innerHTML=`<small style="color:var(--muted)">Gõ bằng tiếng Tây Ban Nha</small><div class="q">${w[1]}</div>
+      <input class="type" id="tIn" placeholder="Nhập câu trả lời..." autocomplete="off">
+      <div class="accents">${['á','é','í','ó','ú','ñ','ü','¿','¡'].map(c=>`<button>${c}</button>`).join('')}</div>
+      <div class="feedback" id="fb"></div><div class="row" style="margin-top:10px"><button class="btn" id="chk">Kiểm tra</button><button class="btn ghost" id="nx">Bỏ qua →</button></div>`;
+    const inp=$('#tIn');inp.focus();
+    box.querySelector('.accents').onclick=e=>{if(e.target.tagName==='BUTTON'){inp.value+=e.target.textContent;inp.focus();}};
+    let done=false;
+    const check=()=>{
+      if(done){nextQ();return;}
+      done=true;const ok=norm(inp.value)===norm(w[0]);score(ok);speak(w[0]);
+      $('#fb').innerHTML=ok?`<span style="color:var(--green)">¡Correcto! ✓ ${w[0]}</span>`:`<span style="color:var(--red)">Đáp án: ${w[0]}</span>`;
+      $('#chk').textContent='Tiếp →';
+    };
+    $('#chk').onclick=check;inp.onkeydown=e=>{if(e.key==='Enter')check()};$('#nx').onclick=()=>{score(false);nextQ()};
+    return;
+  }
+  const opts=shuffle([w,...shuffle(words.filter(x=>x!==w)).slice(0,3)]);
+  const ask = mode==='vi2es'? w[1] : w[0];
+  const ansIdx = mode==='vi2es'?0:1;
+  const label = {es2vi:'Từ này nghĩa là gì?',vi2es:'Chọn từ tiếng Tây Ban Nha đúng',listen:'Nghe và chọn nghĩa đúng'}[mode];
+  box.innerHTML=`<small style="color:var(--muted)">${label}</small>
+    <div class="q">${mode==='listen'?'<button class="btn" id="play" style="font-size:1.4rem">🔊 Nghe lại</button>':ask}</div>
+    ${mode==='es2vi'?'<button class="icon" id="play">🔊</button>':''}
+    <div class="opts">${opts.map((o,i)=>`<button class="opt" data-i="${i}">${mode==='vi2es'?o[0]:o[1]}</button>`).join('')}</div>
+    <div class="feedback" id="fb"></div>`;
+  const p=$('#play');if(p)p.onclick=()=>speak(w[0]);
+  if(mode==='listen')setTimeout(()=>speak(w[0]),250);
+  box.querySelector('.opts').onclick=e=>{
+    const b=e.target.closest('.opt');if(!b||b.disabled)return;
+    const ok=opts[b.dataset.i]===w;score(ok);
+    box.querySelectorAll('.opt').forEach((x,i)=>{x.disabled=true;if(opts[i]===w)x.classList.add('right')});
+    if(!ok)b.classList.add('wrong');
+    if(mode!=='es2vi')speak(w[0]);
+    $('#fb').innerHTML=(ok?`<span style="color:var(--green)">¡Correcto! 🎉</span>`:`<span style="color:var(--red)">${w[0]} = ${w[1]}</span>`)+` <button class="btn" style="margin-left:10px;padding:7px 14px" id="nx">Tiếp →</button>`;
+    $('#nx').onclick=nextQ;
+  };
+}
+
+// ---------- grammar ----------
+$('#grammar').innerHTML='<h2 style="margin-bottom:14px">Ngữ pháp nền tảng</h2>'+GRAMMAR.map(g=>`<div class="gcard"><h3>${g.t}</h3>${g.html}</div>`).join('');
+
+renderStats();renderTopics();
+</script>
+</body>
+</html>
