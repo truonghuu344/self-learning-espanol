@@ -285,3 +285,42 @@ window.GRAMMAR = [
     <tr><td>ellos</td><td>van</td><td><span class="say">Van a viajar</span> — Họ sẽ đi du lịch</td></tr>
     </tbody></table>` }
 ];
+
+// Lộ trình học: mỗi chặng gồm các bài (t = chủ đề từ vựng, g = bài ngữ pháp)
+window.PATH = [
+  { title: "Khởi động", level: "A1", desc: "Làm quen âm thanh và những câu chào đầu tiên.", units: [
+    ["g", "pronunciacion"], ["t", "saludos"], ["g", "pronombres"], ["t", "numeros"] ] },
+  { title: "Nền tảng", level: "A1", desc: "Danh từ, giống, tính từ và hai động từ quan trọng nhất.", units: [
+    ["g", "articulos"], ["t", "familia"], ["t", "colores"], ["g", "ser-estar"], ["t", "adjetivos"] ] },
+  { title: "Cuộc sống hằng ngày", level: "A1", desc: "Chia động từ và nói về sinh hoạt thường ngày.", units: [
+    ["g", "presente"], ["t", "verbos"], ["t", "comida"], ["t", "tiempo"], ["t", "casa"], ["g", "preguntas"] ] },
+  { title: "Giao tiếp", level: "A2", desc: "Diễn đạt sở thích, cảm xúc và những câu dùng mỗi ngày.", units: [
+    ["t", "frases"], ["t", "cuerpo"], ["g", "gustar"], ["t", "emociones"] ] },
+  { title: "Ra thế giới", level: "A2", desc: "Sẵn sàng cho chuyến đi đầu tiên tới nơi nói tiếng Tây Ban Nha.", units: [
+    ["t", "clima"], ["t", "viajes"], ["g", "futuro"] ] }
+];
+
+// Mẹo & kinh nghiệm học
+window.TIPS = [
+  { cat: "Phương pháp", icon: "🧠", title: "Học ít nhưng đều", body: "15 phút mỗi ngày hiệu quả hơn 2 tiếng mỗi cuối tuần. Bộ não ghi nhớ tốt nhất khi được nhắc lại nhiều lần, cách quãng." },
+  { cat: "Phương pháp", icon: "🔁", title: "Tin vào lịch ôn tập", body: "Phần Ôn tập dùng lặp lại ngắt quãng: hãy ôn hết các thẻ đến hạn trước khi học từ mới. Đừng cố học quá 10–20 từ mới mỗi ngày." },
+  { cat: "Phương pháp", icon: "✍️", title: "Thành thật khi tự chấm", body: "Nếu phải nghĩ quá 3 giây mới nhớ, hãy bấm \"Khó\". Chấm dễ dãi làm thẻ biến mất quá lâu và bạn sẽ quên." },
+  { cat: "Phương pháp", icon: "📦", title: "Học cả cụm, không học từ rời", body: "Học \"tengo hambre\" (tôi đói) thay vì chỉ \"hambre\". Cụm từ giúp bạn nói được ngay và nhớ luôn ngữ pháp." },
+  { cat: "Phương pháp", icon: "🗣️", title: "Nói to khi học", body: "Đọc to mỗi từ sau khi nghe. Việc dùng miệng tạo thêm một đường ghi nhớ và giúp bạn quen cơ miệng phát âm." },
+  { cat: "Phát âm", icon: "👄", title: "Năm nguyên âm luôn cố định", body: "a, e, i, o, u luôn đọc giống nhau dù ở vị trí nào — gần giống tiếng Việt. Đây là lợi thế lớn của người Việt." },
+  { cat: "Phát âm", icon: "🌀", title: "Luyện âm R rung", body: "Đặt đầu lưỡi sau răng cửa trên, thổi hơi để lưỡi rung — như tiếng động cơ \"drrr\". Tập với perro, carro, rápido mỗi ngày vài phút." },
+  { cat: "Phát âm", icon: "🎯", title: "Chú ý trọng âm", body: "Từ kết thúc bằng nguyên âm, n, s: nhấn âm tiết áp chót (casa, hablan). Còn lại nhấn âm cuối (hablar, ciudad). Dấu sắc là ngoại lệ, luôn nhấn chỗ có dấu." },
+  { cat: "Phát âm", icon: "🔇", title: "Chữ H luôn câm", body: "hola đọc là \"ô-la\", hotel là \"ô-tel\". Đừng bật âm h như tiếng Anh." },
+  { cat: "Ngữ pháp", icon: "⚖️", title: "Ser hay Estar?", body: "Mẹo DOCTOR / PLACE: Ser cho mô tả, nghề nghiệp, tính cách, thời gian, nguồn gốc, quan hệ. Estar cho vị trí, cảm xúc, hành động đang diễn ra, trạng thái." },
+  { cat: "Ngữ pháp", icon: "🧩", title: "Học động từ theo mẫu", body: "Chỉ cần thuộc ba mẫu -ar, -er, -ir là chia được hàng trăm động từ có quy tắc. Học riêng các động từ bất quy tắc phổ biến: ser, estar, ir, tener, hacer." },
+  { cat: "Ngữ pháp", icon: "🏷️", title: "Luôn học danh từ kèm mạo từ", body: "Học \"la mano\", \"el día\" chứ không chỉ \"mano\", \"día\". Như vậy bạn không bao giờ phải đoán giống của danh từ." },
+  { cat: "Kinh nghiệm", icon: "🎬", title: "Xem phim có phụ đề tiếng Tây Ban Nha", body: "Khi đã có khoảng 300 từ, hãy xem phim, series bạn thích với phụ đề tiếng Tây Ban Nha (không phải tiếng Việt). Mắt và tai sẽ học cùng lúc." },
+  { cat: "Kinh nghiệm", icon: "📱", title: "Đổi ngôn ngữ điện thoại", body: "Chuyển điện thoại hoặc một ứng dụng quen thuộc sang tiếng Tây Ban Nha. Bạn sẽ học được hàng chục từ thông dụng mà không tốn công." },
+  { cat: "Kinh nghiệm", icon: "📓", title: "Viết nhật ký 3 câu", body: "Mỗi tối viết 3 câu đơn giản về ngày của bạn: Hoy estudio español. Estoy cansado. Mañana voy a trabajar. Viết đều sẽ biến kiến thức thụ động thành chủ động." },
+  { cat: "Kinh nghiệm", icon: "🤝", title: "Tìm bạn trao đổi ngôn ngữ", body: "Nhiều người nói tiếng Tây Ban Nha muốn học tiếng Việt hoặc tiếng Anh. Trao đổi 30 phút mỗi tuần giúp bạn tự tin nói hơn bất kỳ ứng dụng nào." },
+  { cat: "Kinh nghiệm", icon: "🙅", title: "Đừng sợ sai", body: "Người bản xứ rất thân thiện với người học. Nói sai mà được sửa là cách nhớ lâu nhất — im lặng mới là sai lầm lớn nhất." },
+  { cat: "Kinh nghiệm", icon: "🌎", title: "Tây Ban Nha hay Mỹ Latinh?", body: "Hai vùng khác nhau ở một số từ và cách phát âm (z/c, vosotros), nhưng hiểu nhau hoàn toàn. Hãy chọn một giọng để luyện nói, và nghe cả hai." },
+  { cat: "Tài nguyên", icon: "🎧", title: "Nghe podcast cho người học", body: "Tìm podcast dành cho người mới (ví dụ Coffee Break Spanish) — người dẫn nói chậm, giải thích rõ, rất hợp để nghe khi di chuyển." },
+  { cat: "Tài nguyên", icon: "▶️", title: "Kênh video phỏng vấn đường phố", body: "Các kênh như Easy Spanish phỏng vấn người thật trên phố, có phụ đề song ngữ — giúp bạn quen tốc độ nói tự nhiên." },
+  { cat: "Tài nguyên", icon: "🎓", title: "Đặt mục tiêu bằng chứng chỉ", body: "Chứng chỉ DELE của Instituto Cervantes có các cấp A1 → C2. Đăng ký một kỳ thi cụ thể là cách tạo động lực rất mạnh." }
+];

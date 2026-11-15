@@ -6,6 +6,11 @@
 
 ## Tính năng
 
+- **Lộ trình** — 5 chặng, 22 bài từ A1 đến A2, xen kẽ từ vựng và ngữ pháp. Mỗi bài từ vựng có bài kiểm tra 10 câu (cần đạt 80%) để mở khóa bài tiếp theo.
+- **Mẹo & kinh nghiệm** — hơn 20 mẹo về phương pháp học, phát âm, ngữ pháp, kinh nghiệm thực tế và tài nguyên; mỗi ngày một "mẹo hôm nay".
+- **Kinh nghiệm (XP) & cấp độ** — nhận XP khi ôn thẻ, trả lời đúng, đọc ngữ pháp, qua bài kiểm tra; lên cấp và nhận danh hiệu (Principiante → Leyenda).
+- **Huy hiệu** — 22 thành tích có thanh tiến độ (ôn 50 thẻ, thuộc 50 từ, chuỗi 7 ngày, 100% một phiên…).
+- **Chuỗi đăng nhập** — điểm danh mỗi ngày nhận thưởng tăng dần theo chu kỳ 7 ngày; ngày thứ 7 tặng khiên bảo vệ chuỗi (giữ chuỗi khi lỡ 1 ngày).
 - **Tổng quan** — mục tiêu hằng ngày, chuỗi ngày học, độ chính xác và tiến độ từng chủ đề.
 - **Từ vựng** — 14 chủ đề (A1–A2), gần 180 từ kèm câu ví dụ và bản dịch; tìm kiếm, lọc theo trạng thái (chưa học / đang học / đã thuộc).
 - **Ôn tập** — flashcard với thuật toán lặp lại ngắt quãng (Leitner): từ nhớ tốt xuất hiện thưa dần, từ hay quên được ôn lại sớm. Giới hạn số từ mới mỗi ngày.
@@ -26,8 +31,8 @@
 ```
 index.html          # khung trang, điều hướng
 assets/style.css    # giao diện (design tokens, sáng/tối, responsive)
-assets/data.js      # dữ liệu từ vựng & bài ngữ pháp
-assets/app.js       # router, lặp lại ngắt quãng, luyện tập, cài đặt
+assets/data.js      # từ vựng, ngữ pháp, lộ trình, mẹo học
+assets/app.js       # router, lặp lại ngắt quãng, luyện tập, XP, huy hiệu, chuỗi đăng nhập
 assets/favicon.svg
 ```
 
